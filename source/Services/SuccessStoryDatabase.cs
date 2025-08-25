@@ -506,6 +506,7 @@ namespace SuccessStory.Services
         private static AchievementSource GetAchievementSourceFromLibraryPlugin(SuccessStorySettings settings, Game game)
         {
             ExternalPlugin pluginType = PlayniteTools.GetPluginType(game.PluginId);
+            Logger.Info($"GetAchievementSourceFromLibraryPlugin for {game.Name} - {pluginType} - {game.Source?.Name}");
             if (pluginType == ExternalPlugin.None)
             {
                 if (game.Source?.Name?.Contains("Xbox Game Pass", StringComparison.OrdinalIgnoreCase) ?? false)
@@ -606,6 +607,9 @@ namespace SuccessStory.Services
                         return AchievementSource.GameJolt;
                     }
                     break;
+
+                case ExternalPlugin.LocalLibrary:
+                    return AchievementSource.Local;
 
                 case ExternalPlugin.None:
                     break;

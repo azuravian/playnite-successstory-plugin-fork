@@ -50,6 +50,7 @@ namespace SuccessStory.Clients
 
             AchievementsDirectories.Add("%DOCUMENTS%\\VALVE");
 
+            AchievementsDirectories.Add("%appdata%\\GSE Saves");
             AchievementsDirectories.Add("%appdata%\\Goldberg SteamEmu Saves");
             AchievementsDirectories.Add("%appdata%\\SmartSteamEmu");
             AchievementsDirectories.Add("%DOCUMENTS%\\DARKSiDERS");
@@ -636,6 +637,7 @@ namespace SuccessStory.Clients
                                 break;
 
                             case "%appdata%\\goldberg steamemu saves":
+                            case "%appdata%\\gse saves":
                                 if (File.Exists(Environment.ExpandEnvironmentVariables(DirAchivements) + $"\\{appId}\\achievements.json"))
                                 {
                                     string Name = string.Empty;
@@ -978,34 +980,25 @@ namespace SuccessStory.Clients
                 #endregion
 
                 #region Get achievements
+                var returnDict = ReturnAchievements.ToDictionary(a => a.ApiName, a => a);
                 ObservableCollection<GameAchievement> steamAchievements = SteamApi.GetAchievementsSchema(appId.ToString()).Item2;
-                steamAchievements?.ForEach(x =>
+
+                foreach (var x in steamAchievements ?? Enumerable.Empty<GameAchievement>())
                 {
-                    bool isFind = false;
-                    for (int j = 0; j < ReturnAchievements.Count; j++)
+                    if (returnDict.TryGetValue(x.Id, out var ach))
                     {
-                        if (ReturnAchievements[j].ApiName.IsEqual(x.Id))
-                        {
-                            Achievement temp = new Achievement
-                            {
-                                ApiName = x.Id,
-                                Name = x.Name,
-                                Description = x.Description,
-                                UrlUnlocked = x.UrlUnlocked,
-                                UrlLocked = x.UrlLocked,
-                                DateUnlocked = x.DateUnlocked,
-                                GamerScore = x.GamerScore
-                            };
-
-                            isFind = true;
-                            ReturnAchievements[j] = temp;
-                            j = ReturnAchievements.Count;
-                        }
+                        // Merge: prefer existing values, fall back to Steam
+                        ach.Name = !string.IsNullOrEmpty(ach.Name) ? ach.Name : x.Name;
+                        ach.Description = !string.IsNullOrEmpty(ach.Description) ? ach.Description : x.Description;
+                        ach.UrlUnlocked = !string.IsNullOrEmpty(ach.UrlUnlocked) ? ach.UrlUnlocked : x.UrlUnlocked;
+                        ach.UrlLocked = !string.IsNullOrEmpty(ach.UrlLocked) ? ach.UrlLocked : x.UrlLocked;
+                        ach.DateUnlocked = ach.DateUnlocked != default ? ach.DateUnlocked : x.DateUnlocked;
+                        ach.GamerScore = ach.GamerScore != default ? ach.GamerScore : x.GamerScore;
                     }
-
-                    if (!isFind)
+                    else
                     {
-                        ReturnAchievements.Add(new Achievement
+                        // Not in Return -> add new
+                        returnDict[x.Id] = new Achievement
                         {
                             ApiName = x.Id,
                             Name = x.Name,
@@ -1013,9 +1006,45 @@ namespace SuccessStory.Clients
                             UrlUnlocked = x.UrlUnlocked,
                             UrlLocked = x.UrlLocked,
                             DateUnlocked = default
-                        });
+                        };
                     }
-                });
+                }
+
+                //steamAchievements?.ForEach(x =>
+                //{
+                //    bool isFind = false;
+                //    for (int j = 0; j < ReturnAchievements.Count; j++)
+                //    {
+                //        if (ReturnAchievements[j].ApiName.IsEqual(x.Id))
+                //        {
+                //            var ach = ReturnAchievements[j];
+
+                //            // Merge: prefer existing values, fall back to Steam
+                //            ach.Name = !string.IsNullOrEmpty(ach.Name) ? ach.Name : x.Name;
+                //            ach.Description = !string.IsNullOrEmpty(ach.Description) ? ach.Description : x.Description;
+                //            ach.UrlUnlocked = !string.IsNullOrEmpty(ach.UrlUnlocked) ? ach.UrlUnlocked : x.UrlUnlocked;
+                //            ach.UrlLocked = !string.IsNullOrEmpty(ach.UrlLocked) ? ach.UrlLocked : x.UrlLocked;
+                //            ach.DateUnlocked = ach.DateUnlocked != default ? ach.DateUnlocked : x.DateUnlocked;
+                //            ach.GamerScore = ach.GamerScore != default ? ach.GamerScore : x.GamerScore;
+
+                //            isFind = true;
+                //            break;
+                //        }
+                //    }
+
+                //    if (!isFind)
+                //    {
+                //        ReturnAchievements.Add(new Achievement
+                //        {
+                //            ApiName = x.Id,
+                //            Name = x.Name,
+                //            Description = x.Description,
+                //            UrlUnlocked = x.UrlUnlocked,
+                //            UrlLocked = x.UrlLocked,
+                //            DateUnlocked = default
+                //        });
+                //    }
+                //});
                 #endregion
 
                 #region Get stats
@@ -1054,7 +1083,7 @@ namespace SuccessStory.Clients
                 #endregion
 
                 // Delete empty (SteamEmu)
-                ReturnAchievements = ReturnAchievements.Select(x => x).Where(x => !string.IsNullOrEmpty(x.UrlLocked)).ToList();
+                ReturnAchievements = returnDict.Values.Where(x => !string.IsNullOrEmpty(x.UrlLocked)).ToList();
 
                 return new SteamEmulatorData { Achievements = ReturnAchievements, Stats = ReturnStats };
             }
