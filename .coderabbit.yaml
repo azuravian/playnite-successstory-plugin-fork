@@ -1,4 +1,4 @@
 # .coderabbit.yaml
 
 # Ignore pull requests coming from these branches.
-ignored_branch: "l10n_master,l10n_devel"
+ignored_branch: "l10n_main,l10n_devel"
