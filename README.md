@@ -4,7 +4,7 @@
 [![Github Lastest Releases](https://img.shields.io/github/downloads/Lacro59/playnite-successstory-plugin/latest/total.svg)]()
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Lacro59/playnite-successstory-plugin)](https://github.com/Lacro59/playnite-successstory-plugin/graphs/commit-activity)
 [![GitHub contributors](https://img.shields.io/github/contributors/Lacro59/playnite-successstory-plugin?cacheSeconds=5000)](https://github.com/Lacro59/playnite-successstory-plugin/graphs/contributors)
-[![GitHub](https://img.shields.io/github/license/Lacro59/playnite-successstory-plugin?cacheSeconds=50000)](https://github.com/Lacro59/playnite-successstory-plugin/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/github/license/azuravian/playnite-successstory-plugin-fork?cacheSeconds=50000)](https://github.com/azuravian/playnite-successstory-plugin-fork/blob/main/LICENSE)
 
 # playnite-successstory-plugin
 Extension for [Playnite](https://playnite.link).
@@ -12,24 +12,24 @@ Extension for [Playnite](https://playnite.link).
 ## Information
 The plugin gets localised achievements (if they exist) or manual achievements.
 
-<a href="https://github.com/Lacro59/playnite-successstory-plugin/blob/main/forum/main_01.jpg?raw=true">
+<a href="https://github.com/azuravian/playnite-successstory-plugin-fork/blob/main/forum/main_01.jpg?raw=true">
   <picture>
-    <img alt="main_01" src="https://github.com/Lacro59/playnite-successstory-plugin/blob/main/forum/main_01.jpg?raw=true" height="150px">
+    <img alt="main_01" src="https://github.com/azuravian/playnite-successstory-plugin-fork/blob/main/forum/main_01.jpg?raw=true" height="150px">
   </picture>
 </a>
-<a href="https://github.com/Lacro59/playnite-successstory-plugin/blob/main/forum/main_02.jpg?raw=true">
+<a href="https://github.com/azuravian/playnite-successstory-plugin-fork/blob/main/forum/main_02.jpg?raw=true">
   <picture>
-    <img alt="main_01" src="https://github.com/Lacro59/playnite-successstory-plugin/blob/main/forum/main_02.jpg?raw=true" height="150px">
+    <img alt="main_01" src="https://github.com/azuravian/playnite-successstory-plugin-fork/blob/main/forum/main_02.jpg?raw=true" height="150px">
   </picture>
 </a>
-<a href="https://github.com/Lacro59/playnite-successstory-plugin/blob/main/forum/control_01.jpg?raw=true">
+<a href="https://github.com/azuravian/playnite-successstory-plugin-fork/blob/main/forum/control_01.jpg?raw=true">
   <picture>
-    <img alt="steamgriddb_01" src="https://github.com/Lacro59/playnite-successstory-plugin/blob/main/forum/control_01.jpg?raw=true" height="150px">
+    <img alt="steamgriddb_01" src="https://github.com/azuravian/playnite-successstory-plugin-fork/blob/main/forum/control_01.jpg?raw=true" height="150px">
   </picture>
 </a>
-<a href="https://github.com/Lacro59/playnite-successstory-plugin/blob/main/forum/settings_01.jpg?raw=true">
+<a href="https://github.com/azuravian/playnite-successstory-plugin-fork/blob/main/forum/settings_01.jpg?raw=true">
   <picture>
-    <img alt="settings_01" src="https://github.com/Lacro59/playnite-successstory-plugin/blob/main/forum/settings_01.jpg?raw=true" height="150px">
+    <img alt="settings_01" src="https://github.com/azuravian/playnite-successstory-plugin-fork/blob/main/forum/settings_01.jpg?raw=true" height="150px">
   </picture>
 </a>
 
